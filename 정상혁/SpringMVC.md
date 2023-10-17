@@ -100,7 +100,7 @@ Spring MVC의 주요 구성요소는 Model, View, Controller지만, 이들이 �
 
 * Model은 Map자료구조로, HTTP Request 속의 데이터를 파싱하여 Key-Value 쌍으로 만들어 저장한다. 이 Model은 이후에 View를 그리기 위해 사용된다.
 
-```java
+```java 
 public ModelAndView(String viewName, @Nullable Map<String, ?> model){
     this.view = viewName;
     if(model!=null){
