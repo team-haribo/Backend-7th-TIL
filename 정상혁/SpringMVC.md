@@ -94,6 +94,18 @@ Spring MVC의 주요 구성요소는 Model, View, Controller지만, 이들이 �
 
 * 또한 HTTP Request에 따라서 HTTP가 보여줄 View Name을 지정한다. 이곳에서 View Name 뿐만 아니라 직접 View를 반환할 수도 있다.
 
+#### annotation
+
+* Spring Controller에서 사용하는 어노테이션으로는 @RequestMapping, @RequestParam, @RequestBody 등이 있다.
+
+* @RequestMapping은 특정 URI로 요청이 올 때 어떤 메소드로 처리할지 매핑해주는 어노테이션이다. 옵션에 따라 주소를 정하거나 매핑의 방식을 정할 수 있다.
+
+    * @RequestMapping중에서도 GET방식으로 구체화된 @GetMapping, POST방식으로 구체화된 @PostMapping이 있다.
+
+* @RequestParam은 클라이언트가 요청한 URL이 파라미터 값과 이름이 함꼐 전달할 때 쿼리스트링에서 파라미터 값을 가져오는 어노테이션이다.
+
+* @RequestBody는 포스트맨이나 프로그램에서 Post방식이나 Put방식으로 객체를 전송할 때 그것을 받아오기 위해 사용할 수 있는 어노테이션이다.
+
 ### ModelAndView
 
 * Controller에 의해 반환된 Model과 View가 Wrapping된 객체이다.
@@ -116,3 +128,23 @@ public ModelAndView(String viewName, @Nullable Map<String, ?> model){
 * ModelAndView를 처리하여 View를 그린다. View는 사용자에게 보여줄 완성된 View 이며, 여기서 그려지는 View가 그대로 유저에게 반환된다.
 
     * 우리가 특정한 url로 들어갔을 때 우리에게 보여지는 View가 바로 ViewResolver에서 만들어지는 View이다.
+
+### 예외 처리
+
+#### @ExceptionHandler
+
+* 컨트롤러에서 예외가 발생했을 때, 예외를 처리하는 메소드를 지정하는 어노테이션이다.
+
+* 보통 예외 처리는 try-catch 블록 안에서 하게되지만, 컨트롤러에서 예외가 발생한 경우에 별도로 @ExceptionHandler를 사용해 예외 처리 메소드를 정의해야 한다.
+
+* 예시로 사용자가 로그인을 시도할 때 인증 오류가 발생하였다면, 서버는 인증 오류에 대한 예외를 return 할 것이고, @ExceptionHandler를 사용하여 예외처리 메소드를 지정해주면, 서버 인증 오류에 대한 예외가 발생한 경우에 서버는 정의된 메소드를 호출하여 예외를 처리할 수 있다.
+
+* 결과적으로 **불필요한 중복 코드를 피하고, 간결하고 유지보수가 가능한 코드**를 만들 수 있다.
+
+## Spring MVC의 장점
+
+* 여러 개발자가 역할을 나누어 모델, 컨트롤러, 뷰를 동시에 개발할 수 있다. 이를 통해 개발시간 단축과 역할분리가 가능하다.
+
+* 중복코드를 없앨 수 있고, 확장성과 유연성이 뛰어나다. 만약 Java코드로 로직을 설계한 것이 웹, 앱으로 배포된다면, View 부분만 바꿀 수 있다.
+
+* 각 컴포넌트 별로 나누어져 있기 때문에 유지보수에 용이하다.
